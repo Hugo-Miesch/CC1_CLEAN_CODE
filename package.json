@@ -1,0 +1,24 @@
+{
+  "name": "cc1_clean_code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hugo-Miesch/CC1_CLEAN_CODE.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Hugo-Miesch/CC1_CLEAN_CODE/issues"
+  },
+  "homepage": "https://github.com/Hugo-Miesch/CC1_CLEAN_CODE#readme",
+  "devDependencies": {
+    "vitest": "^4.0.18"
+  }
+}
