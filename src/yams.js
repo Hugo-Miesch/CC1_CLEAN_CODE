@@ -1,41 +1,13 @@
-function checkThreeOfKind(dice) {
-    for (let roll of dice) {
-        const counts = {};
-        for (let die of roll) {
-            counts[die] = (counts[die] || 0) + 1;
-            if (counts[die] >= 3) {
-                return 28;
-            }
-        }
+function checkKind(dice, needed, score) {
+  for (const roll of dice) {
+    const counts = Array(7).fill(0);
+    for (const die of roll) {
+      if (++counts[die] >= needed) return score;
     }
-    return 0;
+  }
+  return 0;
 }
 
-function checkFourOfKind(dice) {
-    for (let roll of dice) {
-        const counts = {};
-        for (let die of roll) {
-            counts[die] = (counts[die] || 0) + 1;
-            if (counts[die] >= 4) {
-                return 35;
-            }
-        }
-    }
-    return 0;
-}
-
-function checkYahtzee(dice) {
-    for (let roll of dice) {
-        const counts = {};
-        for (let die of roll) {
-            counts[die] = (counts[die] || 0) + 1;
-            if (counts[die] >= 5) {
-                return 50;
-            }
-        }
-    }
-    return 0;
-}
 
 function checkFullHouse(dice) {
     for (let roll of dice) {
@@ -74,6 +46,10 @@ function getHighestSum(dice) {
 }
 
 export function scoreYams(dice) {
+    const checkThreeOfKind = (dice) => checkKind(dice, 3, 28);
+    const checkFourOfKind = (dice) => checkKind(dice, 4, 35);
+    const checkYahtzee = (dice) => checkKind(dice, 5, 50);
+
     const checkers = [
         checkYahtzee,
         checkLargeStraight,
