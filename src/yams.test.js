@@ -23,5 +23,13 @@ describe('Return the highest Yams score from the given dice', () => {
     it('returns the best possible score from multiple rolls', () => {
         expect(scoreYams([[2, 2, 2, 2, 5], [3, 3, 3, 5, 5], [6, 6, 6, 6, 6], [1, 2, 3, 4, 5]])).toBe(50);
     })
+    it ('return 0 for no dice', () => {
+        expect(scoreYams([])).toBe(0);
+    })
+    it ('return 0 if no 5 dice rolls', () => {
+        expect(scoreYams([[1, 2, 3, 4, 5, 6], [4, 5]])).toBe(0);
+    })
+    it ('return 0 if a roll contains invalid die values', () => {
+        expect(scoreYams([[1, 2, 3, 4, 7], [4, 5, 6, 0, -1]])).toBe(0);
+    })
 })
-    

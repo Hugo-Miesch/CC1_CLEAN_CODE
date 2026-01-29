@@ -45,7 +45,27 @@ function getHighestSum(dice) {
     return maxSum;
 }
 
+function validateDice(dice) {
+    if (!Array.isArray(dice)) return false;
+
+    for (let roll of dice) {
+        if (!Array.isArray(roll) || roll.length !== 5) {
+            return false;
+        }
+
+        for (let die of roll) {
+            if (!Number.isInteger(die) || die < 1 || die > 6) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 export function scoreYams(dice) {
+    if (!validateDice(dice)) {
+        return 0;
+    }
     const checkThreeOfKind = (dice) => checkKind(dice, 3, 28);
     const checkFourOfKind = (dice) => checkKind(dice, 4, 35);
     const checkYahtzee = (dice) => checkKind(dice, 5, 50);
@@ -57,6 +77,7 @@ export function scoreYams(dice) {
         checkFourOfKind,
         checkThreeOfKind
     ];
+
     for (let checker of checkers) {
         const score = checker(dice);
         if (score > 0) {
