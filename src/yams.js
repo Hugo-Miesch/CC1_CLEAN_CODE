@@ -37,6 +37,21 @@ function checkYams(dice) {
     return 0;
 }
 
+function checkFull(dice) {
+    for (let roll of dice) {
+        const counts = {};
+        for (let die of roll) {
+            counts[die] = (counts[die] || 0) + 1;
+        }
+        const hasThree = Object.values(counts).some(count => count === 3);
+        const hasTwo = Object.values(counts).some(count => count === 2);
+        if (hasThree && hasTwo) {
+            return 30;
+        }
+    }
+    return 0;
+}
+
 function getHighestSum(dice) {
     let maxSum = 0;
     for (let roll of dice) {
@@ -52,12 +67,16 @@ export function scoreYams(dice) {
     const brelanScore = checkBrelan(dice);
     const squareScore = checkSquare(dice);
     const yamsScore = checkYams(dice);
+    const fullScore = checkFull(dice);
 
     if (yamsScore > 0) {
         return yamsScore;
     }
     if (squareScore > 0) {
         return squareScore;
+    }
+    if (fullScore > 0) {
+        return fullScore;
     }
     if (brelanScore > 0) {
         return brelanScore;

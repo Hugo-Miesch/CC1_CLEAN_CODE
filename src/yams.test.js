@@ -14,5 +14,8 @@ describe('Return the highest Yams score from the given dice', () => {
     it('returns 50 if any roll contains five of a kind', () => {
         expect(scoreYams([[1, 2, 3, 4, 6], [4, 4, 4, 4, 4]])).toBe(50);
     })
+    it('returns 30 if any roll contains a full', () => {
+        expect(scoreYams([[1, 2, 3, 4, 6], [3, 3, 3, 5, 5]])).toBe(30);
+    })
 })
     
