@@ -17,5 +17,11 @@ describe('Return the highest Yams score from the given dice', () => {
     it('returns 30 if any roll contains a full', () => {
         expect(scoreYams([[1, 2, 3, 4, 6], [3, 3, 3, 5, 5]])).toBe(30);
     })
+    it('returns 40 if any roll contains a Yahtzee', () => {
+        expect(scoreYams([[1, 2, 3, 4, 5], [1, 4, 3, 2, 1]])).toBe(40);
+    })
+    it('returns the best possible score from multiple rolls', () => {
+        expect(scoreYams([[2, 2, 2, 2, 5], [3, 3, 3, 5, 5], [6, 6, 6, 6, 6], [1, 2, 3, 4, 5]])).toBe(50);
+    })
 })
     

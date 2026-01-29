@@ -1,4 +1,4 @@
-function checkBrelan(dice) {
+function checkThreeOfKind(dice) {
     for (let roll of dice) {
         const counts = {};
         for (let die of roll) {
@@ -11,7 +11,7 @@ function checkBrelan(dice) {
     return 0;
 }
 
-function checkSquare(dice) {
+function checkFourOfKind(dice) {
     for (let roll of dice) {
         const counts = {};
         for (let die of roll) {
@@ -24,7 +24,7 @@ function checkSquare(dice) {
     return 0;
 }
 
-function checkYams(dice) {
+function checkYahtzee(dice) {
     for (let roll of dice) {
         const counts = {};
         for (let die of roll) {
@@ -37,7 +37,7 @@ function checkYams(dice) {
     return 0;
 }
 
-function checkFull(dice) {
+function checkFullHouse(dice) {
     for (let roll of dice) {
         const counts = {};
         for (let die of roll) {
@@ -47,6 +47,16 @@ function checkFull(dice) {
         const hasTwo = Object.values(counts).some(count => count === 2);
         if (hasThree && hasTwo) {
             return 30;
+        }
+    }
+    return 0;
+}
+
+function checkLargeStraight(dice) {
+    for (let roll of dice) {
+        const sortedRoll = [...new Set(roll)].sort((a, b) => a - b);
+        if (sortedRoll.length === 5 && sortedRoll[4] - sortedRoll[0] === 4) {
+            return 40;
         }
     }
     return 0;
@@ -64,22 +74,18 @@ function getHighestSum(dice) {
 }
 
 export function scoreYams(dice) {
-    const brelanScore = checkBrelan(dice);
-    const squareScore = checkSquare(dice);
-    const yamsScore = checkYams(dice);
-    const fullScore = checkFull(dice);
-
-    if (yamsScore > 0) {
-        return yamsScore;
-    }
-    if (squareScore > 0) {
-        return squareScore;
-    }
-    if (fullScore > 0) {
-        return fullScore;
-    }
-    if (brelanScore > 0) {
-        return brelanScore;
+    const checkers = [
+        checkYahtzee,
+        checkLargeStraight,
+        checkFullHouse,
+        checkFourOfKind,
+        checkThreeOfKind
+    ];
+    for (let checker of checkers) {
+        const score = checker(dice);
+        if (score > 0) {
+            return score;
+        }
     }
     return getHighestSum(dice);
 }
